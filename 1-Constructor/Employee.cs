@@ -13,9 +13,9 @@ class Employee
         this.Surname = surname;
     }
     //Constructor-Overloading
-    public Employee(string name,string surname)
+    public Employee(string name, string surname)
     {
-        this.Name=name;
-        this.Surname=surname;
+        this.Name = name;
+        this.Surname = surname;
     }
 }
