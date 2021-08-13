@@ -217,3 +217,59 @@ Program.cs
         }
     }            
 ```
+
+## Polymorphism(Çokbiçimlilik)
+- Polymorphism : base class'ta ki metotlara virtual keyword'u ekleyerek, o metotları sanallaştırmaktır. Derived class'larda bu metot override keywordu ile ezilir-biçimi değiştirilir.
+- Kısaca base class'ta yazılmış bir metot derived class'larda, aynı metot ismiyle farklı çıktılar verebilir.
+
+Person.cs
+```csharp
+    class Person
+    {
+        //Virtual
+        public string Name { get; set; }
+        
+        virtual public void sayGoodMorning()
+        {
+            System.Console.WriteLine("Günaydın");
+        }
+    }
+```
+German.cs
+```csharp
+    class German:Person
+    {
+        //Override
+        public override void sayGoodMorning()
+        {
+            base.sayGoodMorning(); //Virtual ile işaretlenen metot(base'den gelen)
+            System.Console.WriteLine("Guten Morgen!");//Metotun override    edilmesiyle düzenlenmiş hali
+        }
+    }
+```
+
+French.cs
+```csharp
+    class French:Person
+    {
+        public override void sayGoodMorning()
+        {
+            base.sayGoodMorning();
+            System.Console.WriteLine("Bon Matin!");
+        }
+    }
+```
+Program.cs
+```csharp
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            German germanPeople = new();
+            germanPeople.sayGoodMorning();//Output: Guten Morgen!
+
+            French frenchPeople=new();
+            frenchPeople.sayGoodMorning();//Output: Bon Matin!
+        }
+    }
+```
