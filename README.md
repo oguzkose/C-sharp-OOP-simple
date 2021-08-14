@@ -323,3 +323,83 @@ Program.cs
         }
     }
 ```
+## Abstract Class
+- Abstract class'lar normal class'lara çok benzer. Ancak Instance'i alınmaz Inheritance ile diğer class'lara implement edilmesi zorunludur.
+- Abstract class'lar gövdelerinde abstract olmayan metotlar ve property'ler de barındırabilir. Abstract metotların gövdesi yazılmaz.
+- Abstact class'a ait abstract metotlar implemente edildikleri class'larda override edilmelidir.
+- RAM'in Heap bölümünde tutulurlar. Referans adresleri Stack'tedir.
+
+Car.cs
+```csharp
+    public abstract class Car
+    {
+        //Araba modelleri için marka adını dönecek olan abstract metot
+        public abstract Brand GetBrandName();
+
+        //(Polymorphism) Virtual ile işaretlendiği için defaultta Blue dönecek  ancak override edilirse Red döndürülebilir.
+        public virtual Color GetColorName()
+        {
+            return Color.Blue;
+        }
+        //Her araba için tekerlek sayısı 4 dönecek.
+        public int HowManyWheels()
+        {
+            return 4;
+        }
+    }
+```
+Enums.cs
+```csharp
+    public enum Brand
+    {
+        Honda,
+        Toyota
+    }
+    public enum Color
+    {
+        Blue,
+        Red
+    }
+```
+Civic.cs
+```csharp
+    class Civic : Car
+    {
+        public override Brand GetBrandName()
+        {
+            return Brand.Honda;
+        }
+        public override Color GetColorName()
+        {
+            return Color.Red;
+        }
+    }
+```
+Corolla.cs
+```csharp
+    class Corolla : Car
+    {
+        public override Brand GetBrandName()
+        {
+            return Brand.Toyota;
+        }
+    }
+```
+Program.cs
+```csharp
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Corolla corolla = new();
+            System.Console.WriteLine(corolla.HowManyWheels());//Output: 4
+            System.Console.WriteLine(corolla.GetColorName());//Output: Blue
+            System.Console.WriteLine(corolla.GetBrandName());//Output: Toyota
+
+            Civic civic = new();
+            System.Console.WriteLine(civic.HowManyWheels());//Output: 4
+            System.Console.WriteLine(civic.GetColorName());//Output: Red
+            System.Console.WriteLine(civic.GetBrandName());//Output: Honda
+        }
+    }          
+```
